@@ -1,5 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router';
+import SocialLogIn from '../SocialLogIn/SocialLogIn';
 
 const Login = () => {
 
@@ -11,7 +13,9 @@ const Login = () => {
 
 
     return (
-        <div>
+        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <div className="card-body">
+                <h1 className="text-3xl font-bold text-center">Log In Now</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <fieldset className="fieldset">
@@ -26,11 +30,14 @@ const Login = () => {
                         errors.password?.type === 'minLength' && <p className='text-red-500 font-bold'>Password must be 8 characters</p>
                     }
                     <div><a className="link link-hover">Forgot password?</a></div>
-                </fieldset>
                     <button className="btn btn-neutral mt-4 ">Login</button>
+                </fieldset>
+                 <p><small>New to this website?<Link className='btn btn-link' to={'/register'}>Register</Link></small></p>
 
 
             </form>
+            <SocialLogIn></SocialLogIn>
+            </div>
         </div>
     );
 };
