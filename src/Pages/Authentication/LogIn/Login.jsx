@@ -1,0 +1,38 @@
+import React from 'react';
+import { useForm } from 'react-hook-form';
+
+const Login = () => {
+
+   const { register,handleSubmit, formState: { errors }} = useForm();
+
+   const onSubmit = data =>{
+    console.log(data)
+   }
+
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+
+                <fieldset className="fieldset">
+                    <label className="label">Email</label>
+                    <input type="email" className="input" {...register('email')}  placeholder="Email" />
+                    <label className="label">Password</label>
+                    <input type="password" {...register('password',{required:true,minLength:8,})} className="input" placeholder="Password" />
+                    {
+                        errors.password?.type === 'required' && <p className='text-red-500 font-bold'>Password is required</p>
+                    }
+                    {
+                        errors.password?.type === 'minLength' && <p className='text-red-500 font-bold'>Password must be 8 characters</p>
+                    }
+                    <div><a className="link link-hover">Forgot password?</a></div>
+                </fieldset>
+                    <button className="btn btn-neutral mt-4 ">Login</button>
+
+
+            </form>
+        </div>
+    );
+};
+
+export default Login;

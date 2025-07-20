@@ -1,0 +1,54 @@
+import React from 'react';
+import { NavLink } from 'react-router';
+import TourLogo from '../TourLogo/TourLogo';
+
+const Navbar = () => {
+
+    const navItems = <>
+    <NavLink className={'mr-2'}  to={'/'}>Home</NavLink>
+    <NavLink className={'mr-2'} >Community</NavLink>
+    <NavLink className={'mr-2'}  >About Us</NavLink>
+    <NavLink className={'mr-2'} >Trips</NavLink>
+
+    
+    </>
+    return (
+        <div className="navbar bg-base-100 shadow-sm">
+            <div className="navbar-start">
+                <div className="dropdown">
+                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+                    </div>
+                    <ul
+                        tabIndex={0}
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            {
+                                navItems
+                            }
+                        
+                    </ul>
+                </div>
+                <div className="btn btn-ghost text-xl mb-4 mt-4">
+
+                    <TourLogo></TourLogo>
+                    <p className='text-4xl font-bold'>Explore Tours</p>
+
+
+                </div>
+            </div>
+            <div className="navbar-center hidden lg:flex">
+                <ul className="menu menu-horizontal px-1">
+                    {
+                        navItems
+                    }
+                    
+                </ul>
+            </div>
+            <div className="navbar-end">
+                <a className="btn">Button</a>
+            </div>
+        </div>
+    );
+};
+
+export default Navbar;
