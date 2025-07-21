@@ -215,16 +215,28 @@ const PackageDetailsPage = () => {
             {isModalOpen && (
                 <div className="modal modal-open">
                     <div className="modal-box">
-                        <h2 className="text-2xl font-bold">Booking Confirmed</h2>
+                        <h2 className="text-2xl font-bold">Confirm Your Booking</h2>
                         <p>Your booking has been submitted with status: <strong>pending</strong>.</p>
-                        <div className="modal-action">
+
+                        <div className="modal-action flex justify-between items-center">
                             <button className="btn" onClick={() => setIsModalOpen(false)}>
                                 Close
+                            </button>
+                            <button
+                                className="btn btn-primary"
+                                onClick={() => {
+                                    setIsModalOpen(false);
+                                    navigate('/my-bookings');
+                                }}
+                            >
+                                Go to My Bookings
                             </button>
                         </div>
                     </div>
                 </div>
             )}
+
+
         </div>
     );
 };
