@@ -4,6 +4,13 @@ import Home from "../Pages/Home/Home/Home";
 import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Authentication/LogIn/Login";
 import Register from "../Pages/Authentication/Register/Register";
+import PrivateRoute from "../OtherRoutes/PrivateRoute";
+import AddPackage from "../Admin/AddPackages/AddPackage";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import UserManageProfile from "../Pages/Dashboard/UserManageProfile/UserManageProfile";
+import UserJoinAsTourGuide from "../Pages/Dashboard/UserJoinAsTourGuide/UserJoinAsTourGuide";
+import AdminManageCandidates from "../Pages/Dashboard/AdminManageCandidates/AdminManageCandidates.JSX";
+
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +20,12 @@ export const router = createBrowserRouter([
         {
             index:true,
             element:<Home></Home>
+        },
+        {
+          path:'addPackage',
+          element:<PrivateRoute>
+            <AddPackage></AddPackage>
+          </PrivateRoute>
         }
     ]
   },
@@ -28,6 +41,28 @@ export const router = createBrowserRouter([
         path:'register',
         element:<Register></Register>
       },
+    ]
+  },
+  {
+    path:'dashboard',
+    element:<PrivateRoute>
+      <DashboardLayout></DashboardLayout>
+    </PrivateRoute>,
+    children:[
+
+      {
+        path:'userManageProfile',
+        element:<UserManageProfile></UserManageProfile>
+      },
+      {
+        path:'joinAsTourGuide',
+        element:<UserJoinAsTourGuide></UserJoinAsTourGuide>
+      },
+      {
+        path:'adminManageCandidates',
+        element:<AdminManageCandidates></AdminManageCandidates>
+      }
+      
     ]
   }
 ]);

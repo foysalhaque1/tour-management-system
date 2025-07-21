@@ -1,14 +1,23 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import TourLogo from '../TourLogo/TourLogo';
+import useAuth from '../../Hooks/useAuth';
 
 const Navbar = () => {
+    const {user} = useAuth();
 
     const navItems = <>
     <NavLink className={'mr-2'}  to={'/'}>Home</NavLink>
     <NavLink className={'mr-2'} >Community</NavLink>
     <NavLink className={'mr-2'}  >About Us</NavLink>
     <NavLink className={'mr-2'} >Trips</NavLink>
+    <NavLink className={'mr-2'} to={'/addPackage'} >Add Package</NavLink>
+
+    {
+
+        user && <NavLink className={'mr-2'} to={'/dashboard'}>DashBoard</NavLink>
+    }
+
 
     
     </>
@@ -45,7 +54,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <p className='btn btn-primary' ><Link  to={'/login'}>Log In</Link>/<Link to={'/register'}>Register</Link></p>
             </div>
         </div>
     );
