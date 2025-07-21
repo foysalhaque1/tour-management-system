@@ -13,6 +13,10 @@ import AdminManageCandidates from "../Pages/Dashboard/AdminManageCandidates/Admi
 import TourGuideManageProfile from "../Pages/Dashboard/TourGuideManageProfile/TourGuideManageProfile";
 import TourGuideAddStories from "../Pages/Dashboard/TourGuideAddStories/TourGuideAddStories";
 import TourGuideManageStories from "../Pages/Dashboard/TourGuideManageStories/TourGuideManageStories";
+import TourGuideUpdateStory from "../Pages/Dashboard/TourGuideUpdateStories/TourGuideUpdateStory";
+import PackageDetailsPage from "../Pages/PackageDetailsPage/PackageDetailsPage";
+import TourGuideProfilePage from "../Pages/TourGuideProfilePage/TourGuideProfilePage";
+
 
 
 export const router = createBrowserRouter([
@@ -29,7 +33,17 @@ export const router = createBrowserRouter([
           element:<PrivateRoute>
             <AddPackage></AddPackage>
           </PrivateRoute>
-        }
+        },
+        {
+          path:'/packages/:id',
+          element:<PrivateRoute>
+            <PackageDetailsPage></PackageDetailsPage>
+          </PrivateRoute>
+        },
+         {
+        path:'tourGuide/:id',
+        element:<TourGuideProfilePage></TourGuideProfilePage>
+      },
     ]
   },
   {
@@ -77,6 +91,11 @@ export const router = createBrowserRouter([
         path:'manageTourGuideStories',
         element:<TourGuideManageStories></TourGuideManageStories>
       },
+      {
+        path:'updateStory/:id',
+        element:<TourGuideUpdateStory></TourGuideUpdateStory>
+      },
+     
       
     ]
   }
