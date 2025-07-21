@@ -10,6 +10,9 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import UserManageProfile from "../Pages/Dashboard/UserManageProfile/UserManageProfile";
 import UserJoinAsTourGuide from "../Pages/Dashboard/UserJoinAsTourGuide/UserJoinAsTourGuide";
 import AdminManageCandidates from "../Pages/Dashboard/AdminManageCandidates/AdminManageCandidates.JSX";
+import TourGuideManageProfile from "../Pages/Dashboard/TourGuideManageProfile/TourGuideManageProfile";
+import TourGuideAddStories from "../Pages/Dashboard/TourGuideAddStories/TourGuideAddStories";
+import TourGuideManageStories from "../Pages/Dashboard/TourGuideManageStories/TourGuideManageStories";
 
 
 export const router = createBrowserRouter([
@@ -61,7 +64,19 @@ export const router = createBrowserRouter([
       {
         path:'adminManageCandidates',
         element:<AdminManageCandidates></AdminManageCandidates>
-      }
+      },
+      {
+        path:'tourGuideManageProfile',
+        element:<TourGuideManageProfile></TourGuideManageProfile>
+      },
+      {
+        path:'tourGuideAddStories',
+        element:<TourGuideAddStories></TourGuideAddStories>
+      },
+      {
+        path:'manageTourGuideStories',
+        element:<TourGuideManageStories></TourGuideManageStories>
+      },
       
     ]
   }

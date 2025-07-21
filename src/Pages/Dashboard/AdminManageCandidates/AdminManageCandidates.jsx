@@ -17,10 +17,16 @@ const AdminManageCandidates = () => {
     });
 
     const acceptMutation = useMutation({
-        mutationFn: id => axiosSecure.patch(`/tourGuideApplication/${id}`),
+        mutationFn: async (id) => {
+            await axiosSecure.patch(`/tourGuideApplication/${id}`);
+            await axiosSecure.delete(`/tourGuideApplication/${id}`);
+        },
         onSuccess: () => {
             qc.invalidateQueries({ queryKey: ['applications'] });
-            Swal.fire('Accepted', 'User is now a Tour Guide', 'success');
+            Swal.fire('Accepted', 'User is now a Tour Guide and application removed', 'success');
+        },
+        onError: () => {
+            Swal.fire('Error', 'Failed to accept and delete application', 'error');
         }
     });
 
@@ -43,13 +49,13 @@ const AdminManageCandidates = () => {
     if (isLoading) return <p className="text-center">Loading...</p>;
 
     return (
-        <div className="p-6 max-w-5xl mx-auto">
+        <div className="p-6 max-w-6xl mx-auto">
             <h2 className="text-2xl font-bold mb-4">Manage Tour Guide Applications</h2>
             <div className="overflow-x-auto bg-white rounded-lg shadow">
                 <table className="w-full table-auto">
                     <thead className="bg-gray-100">
                         <tr>
-                            {['Photo', 'Name', 'Email', 'Title', 'Status', 'Actions'].map(h => (
+                            {['Photo', 'Name', 'Email', 'Title', 'Status', 'Role', 'CV', 'Actions'].map(h => (
                                 <th key={h} className="py-3 px-4 text-left">{h}</th>
                             ))}
                         </tr>
@@ -72,6 +78,22 @@ const AdminManageCandidates = () => {
                                         {u.status}
                                     </span>
                                 </td>
+                                <td className="py-2 px-4 capitalize">{u.role || 'tourist'}</td>
+                                <td className="py-2 px-4">
+                                    {u.cv ? (
+                                        <a
+                                            href={`http://localhost:5000/uploads/${u.cv}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-blue-600 hover:underline"
+                                            download
+                                        >
+                                            Download CV
+                                        </a>
+                                    ) : (
+                                        <span className="text-gray-400">No CV</span>
+                                    )}
+                                </td>
                                 <td className="py-2 px-4 flex gap-2">
                                     <button
                                         disabled={u.status === 'accepted'}
@@ -90,7 +112,7 @@ const AdminManageCandidates = () => {
                             </tr>
                         ))}
                         {users.length === 0 && (
-                            <tr><td colSpan="6" className="text-center py-4">No applications found.</td></tr>
+                            <tr><td colSpan="8" className="text-center py-4">No applications found.</td></tr>
                         )}
                     </tbody>
                 </table>

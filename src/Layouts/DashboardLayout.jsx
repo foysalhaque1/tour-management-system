@@ -41,7 +41,7 @@ const DashboardLayout = () => {
                 <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                     {/* Sidebar content here */}
                     <TourLogo></TourLogo>
-                    <div className='user'>
+                    <div className='Tourist'>
 
                         <li><a className='text-2xl font-bold'>User</a></li>
                         <li><NavLink to="/dashboard/userManageProfile">User Manage Profile</NavLink></li>
@@ -50,6 +50,14 @@ const DashboardLayout = () => {
 
                         <li><a className='text-2xl font-bold'>Admin</a></li>
                         <li><NavLink to="/dashboard/adminManageCandidates">Admin Manage Candidates</NavLink></li>
+                    </div>
+                    <div className='Tour Guide'>
+
+                        <li><a className='text-2xl font-bold'>Tour Guide</a></li>
+                        <li><NavLink to="/dashboard/tourGuideManageProfile">Tour Guide Manage Profile</NavLink></li>
+
+                        <li><NavLink to="/dashboard/tourGuideAddStories">Tour Guide Add Stories</NavLink></li>
+                        <li><NavLink to="/dashboard/manageTourGuideStories">Manage Tour Guide  Stories</NavLink></li>
                     </div>
                 </ul>
             </div>
