@@ -48,6 +48,7 @@ const DashboardLayout = () => {
                         <li><a className='text-2xl font-bold'>User</a></li>
                         <li><NavLink to="/dashboard/userManageProfile">User Manage Profile</NavLink></li>
                         <li><NavLink to={`/dashboard/myBookings/${user.email}`} >User My Booking Page</NavLink></li>
+                        <li><NavLink to="/dashboard/userAddStories">User Add Stories</NavLink></li>
                     </div>
                     <div className='Admin'>
 

@@ -18,6 +18,7 @@ import PackageDetailsPage from "../Pages/PackageDetailsPage/PackageDetailsPage";
 import TourGuideProfilePage from "../Pages/TourGuideProfilePage/TourGuideProfilePage";
 import UserBookingPage from "../Pages/Dashboard/UserBookingPage/UserBookingPage";
 import Payment from "../Pages/Payment/Payment";
+import UserAddStories from "../Pages/Dashboard/UserAddStories/UserAddStories";
 
 
 
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
       {
         path:'userManageProfile',
         element:<UserManageProfile></UserManageProfile>
+      },
+      {
+        path:'userAddStories',
+        element:<UserAddStories></UserAddStories>
       },
       {
         path:'joinAsTourGuide',

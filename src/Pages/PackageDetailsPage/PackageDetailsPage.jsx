@@ -218,9 +218,20 @@ const PackageDetailsPage = () => {
 
                     </div>
 
-                    <button type="submit" className="btn btn-primary w-full">
+                    <button
+                        type="button"
+                        className="btn btn-primary w-full"
+                        onClick={() => {
+                            if (!user) {
+                                navigate('/login');
+                            } else {
+                                handleSubmit(onSubmit)(); // Manually trigger form submit
+                            }
+                        }}
+                    >
                         Book Now
                     </button>
+
                 </form>
             </div>
 

@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useNavigate } from 'react-router';
+import Swal from 'sweetalert2';
 
 
 const UserBookingPage = () => {
@@ -26,9 +27,23 @@ const UserBookingPage = () => {
         },
         onSuccess: () => {
             queryClient.invalidateQueries(['userBookings', user?.email]);
+            Swal.fire({
+                icon: 'success',
+                title: 'Booking Cancelled',
+                text: 'Your booking has been cancelled successfully.',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        },
+        onError: (err) => {
+            console.log(err)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops!',
+                text: 'Failed to cancel booking. Please try again.',
+            });
         }
     });
-
     if (isLoading) return <p>Loading...</p>;
 
     return (
@@ -48,7 +63,7 @@ const UserBookingPage = () => {
                     </thead>
                     <tbody>
                         {bookings.map((booking) => (
-                            
+
                             <tr key={booking._id}>
                                 <td>{booking.packageName}</td>
                                 <td>{booking.tourGuideName || 'N/A'}</td>

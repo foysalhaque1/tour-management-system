@@ -4,16 +4,17 @@ import { useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useNavigate } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
+import Swal from 'sweetalert2';
 
 
-const CheckoutForm = ({ bookingData,clientSecret }) => {
+const CheckoutForm = ({ bookingData, clientSecret }) => {
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const [error, setError] = useState('');
     const [processing, setProcessing] = useState(false);
-    const {user} = useAuth()
+    const { user } = useAuth()
     console.log(clientSecret)
 
     const handleSubmit = async (e) => {
@@ -59,7 +60,15 @@ const CheckoutForm = ({ bookingData,clientSecret }) => {
 
             await axiosSecure.post('/payments', paymentInfo);
 
-            navigate(`/dashboard/myBookings/${user.email}`);
+            Swal.fire({
+                icon: 'success',
+                title: 'Payment Successful!',
+                text: `Transaction ID: ${paymentIntent.id}`,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Go to My Bookings'
+            }).then(() => {
+                navigate(`/dashboard/myBookings/${user.email}`);
+            });
         }
 
         setProcessing(false);
