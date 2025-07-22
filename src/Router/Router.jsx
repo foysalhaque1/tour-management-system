@@ -16,6 +16,8 @@ import TourGuideManageStories from "../Pages/Dashboard/TourGuideManageStories/To
 import TourGuideUpdateStory from "../Pages/Dashboard/TourGuideUpdateStories/TourGuideUpdateStory";
 import PackageDetailsPage from "../Pages/PackageDetailsPage/PackageDetailsPage";
 import TourGuideProfilePage from "../Pages/TourGuideProfilePage/TourGuideProfilePage";
+import UserBookingPage from "../Pages/Dashboard/UserBookingPage/UserBookingPage";
+import Payment from "../Pages/Payment/Payment";
 
 
 
@@ -40,9 +42,14 @@ export const router = createBrowserRouter([
             <PackageDetailsPage></PackageDetailsPage>
           </PrivateRoute>
         },
+
          {
         path:'tourGuide/:id',
         element:<TourGuideProfilePage></TourGuideProfilePage>
+      },
+         {
+        path:'payment/:id',
+        element:<Payment></Payment>
       },
     ]
   },
@@ -94,6 +101,10 @@ export const router = createBrowserRouter([
       {
         path:'updateStory/:id',
         element:<TourGuideUpdateStory></TourGuideUpdateStory>
+      },
+      {
+        path:'myBookings/:email',
+        element:<UserBookingPage></UserBookingPage>
       },
      
       

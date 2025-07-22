@@ -2,8 +2,10 @@ import React from 'react';
 import { NavLink, Outlet } from 'react-router';
 
 import TourLogo from '../Shared/TourLogo/TourLogo';
+import useAuth from '../Hooks/useAuth';
 
 const DashboardLayout = () => {
+    const {user} = useAuth();
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -45,6 +47,7 @@ const DashboardLayout = () => {
 
                         <li><a className='text-2xl font-bold'>User</a></li>
                         <li><NavLink to="/dashboard/userManageProfile">User Manage Profile</NavLink></li>
+                        <li><NavLink to={`/dashboard/myBookings/${user.email}`} >User My Booking Page</NavLink></li>
                     </div>
                     <div className='Admin'>
 

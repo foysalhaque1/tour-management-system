@@ -16,6 +16,7 @@ const PackageDetailsPage = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedGuide, setSelectedGuide] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { register, handleSubmit, reset } = useForm();
 
@@ -23,7 +24,7 @@ const PackageDetailsPage = () => {
         queryKey: ['packageDetails', id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/packages/${id}`);
-            console.log(res)
+            console.log(res.data)
             return res.data;
         }
     });
@@ -32,9 +33,16 @@ const PackageDetailsPage = () => {
         queryKey: ['tourGuides'],
         queryFn: async () => {
             const res = await axiosSecure.get('/tourGuides');
+            console.log(res.data)
             return res.data;
         }
     });
+    const handleGuideSelect = (id) => {
+        const guide = guides.find(g => g._id === id);
+        setSelectedGuide(guide);
+    };
+    console.log(selectedGuide)
+
 
     if (isLoading || guidesLoading) return <p className="text-center">Loading...</p>;
     if (isError || !pkg) return <p className="text-center text-red-500">Failed to load package</p>;
@@ -54,6 +62,7 @@ const PackageDetailsPage = () => {
             price: pkg.price,
             tourDate: selectedDate,
             guideId: data.guideId,
+            tourGuideName: selectedGuide?.name,
             status: 'pending'
         };
 
@@ -195,6 +204,9 @@ const PackageDetailsPage = () => {
                         <select
                             {...register('guideId', { required: true })}
                             className="select select-bordered w-full"
+                            onChange={(e) => {
+                                handleGuideSelect(e.target.value);
+                            }}
                         >
                             <option value="">Select a guide</option>
                             {guides?.map((guide) => (
@@ -203,6 +215,7 @@ const PackageDetailsPage = () => {
                                 </option>
                             ))}
                         </select>
+
                     </div>
 
                     <button type="submit" className="btn btn-primary w-full">
@@ -226,7 +239,7 @@ const PackageDetailsPage = () => {
                                 className="btn btn-primary"
                                 onClick={() => {
                                     setIsModalOpen(false);
-                                    navigate('/my-bookings');
+                                    navigate(`/dashboard/myBookings/${user?.email}`);
                                 }}
                             >
                                 Go to My Bookings
