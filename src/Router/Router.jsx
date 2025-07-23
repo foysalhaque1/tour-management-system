@@ -23,6 +23,7 @@ import UserManageStories from "../Pages/Dashboard/UserManageStories/UserManageSt
 import UserUpdateStory from "../Pages/Dashboard/UserUpdateStory/UserUpdateStory";
 import AllStories from "../Pages/AllStoriesOfUsers/AllStories";
 import TourGuideAssignedTours from "../Pages/Dashboard/TourGuideAssignedTours/TourGuideAssignedTours";
+import AdminManageProfile from "../Pages/Dashboard/AdminManageProfile/AdminManageProfile";
 
 
 
@@ -35,12 +36,7 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home></Home>
       },
-      {
-        path: 'addPackage',
-        element: <PrivateRoute>
-          <AddPackage></AddPackage>
-        </PrivateRoute>
-      },
+      
       {
         path: '/packages/:id',
         element: <PrivateRoute>
@@ -104,8 +100,16 @@ export const router = createBrowserRouter([
         element: <UserJoinAsTourGuide></UserJoinAsTourGuide>
       },
       {
+        path: 'addPackage',
+        element:<AddPackage></AddPackage>
+      },
+      {
         path: 'adminManageCandidates',
         element: <AdminManageCandidates></AdminManageCandidates>
+      },
+      {
+        path: 'adminManageProfile',
+        element: <AdminManageProfile></AdminManageProfile>
       },
       {
         path: 'tourGuideManageProfile',

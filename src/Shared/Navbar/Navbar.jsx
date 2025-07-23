@@ -11,7 +11,7 @@ const Navbar = () => {
     <NavLink className={'mr-2'} >Community</NavLink>
     <NavLink className={'mr-2'}  >About Us</NavLink>
     <NavLink className={'mr-2'} >Trips</NavLink>
-    <NavLink className={'mr-2'} to={'/addPackage'} >Add Package</NavLink>
+   
 
     {
 

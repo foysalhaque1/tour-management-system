@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 
@@ -48,6 +48,28 @@ const UserManageProfile = () => {
             });
         }
     };
+
+    useEffect(() => {
+        const saveUser = async () => {
+            if (user?.email) {
+                const userInfo = {
+                    displayName: user.displayName,
+                    photoURL: user.photoURL,
+                    email: user.email,
+                    role: 'tourist', // or 'user'
+                };
+
+                try {
+                    const res = await axiosSecure.put(`/usersInfo/${user.email}`, userInfo); // use PUT for upsert
+                    console.log('User saved/updated:', res.data);
+                } catch (error) {
+                    console.error('Failed to save user profile:', error);
+                }
+            }
+        };
+
+        saveUser();
+    }, [user, axiosSecure]);
 
 
     const role = 'User / Tourist';
