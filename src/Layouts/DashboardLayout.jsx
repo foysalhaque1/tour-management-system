@@ -55,9 +55,10 @@ const DashboardLayout = () => {
                     <div className='Admin'>
 
                         <li><a className='text-2xl font-bold'>Admin</a></li>
-                        <li><NavLink to="/dashboard/adminManageProfile">Admin Manage Manage Profile</NavLink></li>
+                        <li><NavLink to="/dashboard/adminManageProfile">Admin  Manage Profile</NavLink></li>
                         <li><NavLink to="/dashboard/adminManageCandidates">Admin Manage Candidates</NavLink></li>
                         <li><NavLink to="/dashboard/addPackage">Add Packages</NavLink></li>
+                        <li><NavLink to="/dashboard/manageUsers">Manage Users</NavLink></li>
                     </div>
                     <div className='Tour Guide'>
 

@@ -24,6 +24,7 @@ import UserUpdateStory from "../Pages/Dashboard/UserUpdateStory/UserUpdateStory"
 import AllStories from "../Pages/AllStoriesOfUsers/AllStories";
 import TourGuideAssignedTours from "../Pages/Dashboard/TourGuideAssignedTours/TourGuideAssignedTours";
 import AdminManageProfile from "../Pages/Dashboard/AdminManageProfile/AdminManageProfile";
+import AdminManageUsers from "../Pages/Dashboard/AdminManageUsers/AdminManageUsers";
 
 
 
@@ -110,6 +111,10 @@ export const router = createBrowserRouter([
       {
         path: 'adminManageProfile',
         element: <AdminManageProfile></AdminManageProfile>
+      },
+      {
+        path: 'manageUsers',
+        element: <AdminManageUsers></AdminManageUsers>
       },
       {
         path: 'tourGuideManageProfile',

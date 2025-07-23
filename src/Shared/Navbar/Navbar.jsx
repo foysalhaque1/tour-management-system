@@ -2,24 +2,43 @@ import React from 'react';
 import { Link, NavLink } from 'react-router';
 import TourLogo from '../TourLogo/TourLogo';
 import useAuth from '../../Hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
-    const {user} = useAuth();
+    const { user, logOut } = useAuth();
+    const handleSignOut = () => {
+        logOut().then(() => {
+            
 
-    const navItems = <>
-    <NavLink className={'mr-2'}  to={'/'}>Home</NavLink>
-    <NavLink className={'mr-2'} >Community</NavLink>
-    <NavLink className={'mr-2'}  >About Us</NavLink>
-    <NavLink className={'mr-2'} >Trips</NavLink>
-   
+        }).then(()=>{
+            Swal.fire({
+                title: "You SignedOut Successfully",
+                icon: "success",
+                draggable: true
+            });
+        })
+        
+        .catch(error => {
+            console.log(error)
+        })
 
-    {
 
-        user && <NavLink className={'mr-2'} to={'/dashboard'}>DashBoard</NavLink>
     }
 
+    const navItems = <>
+        <NavLink className={'mr-2'} to={'/'}>Home</NavLink>
+        <NavLink className={'mr-2'} >Community</NavLink>
+        <NavLink className={'mr-2'}  >About Us</NavLink>
+        <NavLink className={'mr-2'} >Trips</NavLink>
 
-    
+
+        {
+
+            user && <NavLink className={'mr-2'} to={'/dashboard'}>DashBoard</NavLink>
+        }
+
+
+
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
@@ -31,10 +50,10 @@ const Navbar = () => {
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            {
-                                navItems
-                            }
-                        
+                        {
+                            navItems
+                        }
+
                     </ul>
                 </div>
                 <div className="btn btn-ghost text-xl mb-4 mt-4">
@@ -50,11 +69,13 @@ const Navbar = () => {
                     {
                         navItems
                     }
-                    
+
                 </ul>
             </div>
             <div className="navbar-end">
-                <p className='btn btn-primary' ><Link  to={'/login'}>Log In</Link>/<Link to={'/register'}>Register</Link></p>
+                {
+                    user ? <button onClick={handleSignOut} className='btn btn-primary'>Sign Out</button> : <p className='btn btn-primary' ><Link to={'/login'}>Log In</Link>/<Link to={'/register'}>Register</Link></p>
+                }
             </div>
         </div>
     );

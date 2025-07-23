@@ -29,6 +29,8 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth,googleProvider);
     };
 
+    
+
     const update = (updateData) =>{
       return  updateProfile(auth.currentUser,updateData)
     }
