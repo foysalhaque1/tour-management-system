@@ -46,7 +46,7 @@ const UserAddStories = () => {
                 Swal.fire('Success!', 'Story added successfully.', 'success');
                 reset();
                 setImages([]);
-                navigate('/dashboard/manageTourGuideStories');
+                navigate(`/dashboard/userManageStories/${user.email}`);
             } else {
                 Swal.fire('Error', responseData.message || 'Something went wrong', 'error');
             }

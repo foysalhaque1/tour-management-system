@@ -63,6 +63,7 @@ const PackageDetailsPage = () => {
             tourDate: selectedDate,
             guideId: data.guideId,
             tourGuideName: selectedGuide?.name,
+            tourGuideEmail: selectedGuide?.email,
             status: 'pending'
         };
 
@@ -73,6 +74,13 @@ const PackageDetailsPage = () => {
                 reset();
                 setSelectedDate(null);
             }
+        } catch (err) {
+            console.error('Booking failed:', err);
+            alert('Booking failed. Please try again.');
+        }
+        try {
+            const res = await axiosSecure.post('/assignedTours', bookingData);
+           console.log(res)
         } catch (err) {
             console.error('Booking failed:', err);
             alert('Booking failed. Please try again.');

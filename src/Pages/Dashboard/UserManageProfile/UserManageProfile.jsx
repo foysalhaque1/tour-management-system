@@ -5,9 +5,10 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import useAuth from '../../../Hooks/useAuth';
 import { Link } from 'react-router';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const UserManageProfile = () => {
-    const { user, update } = useAuth();
+    const { user } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { register, handleSubmit, reset } = useForm();
 
@@ -16,29 +17,38 @@ const UserManageProfile = () => {
         setIsModalOpen(true);
     };
 
-    const onSubmit = (data) => {
-        update({
-            displayName: data.name,
-            photoURL: data.image,
-        })
-            .then(() => {
+    const axiosSecure = useAxiosSecure()
+
+    const onSubmit = async (data) => {
+        try {
+            const res = await axiosSecure.put(`/users/profile/${user.email}`, {
+                displayName: data.name,
+                photoURL: data.image,
+                email: user.email,
+                role: 'user',
+            });
+
+            if (res.data.success) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Profile Updated',
+                    title: 'Profile Updated Successfully!',
                     showConfirmButton: false,
                     timer: 1500,
                 });
                 setIsModalOpen(false);
-            })
-            .catch((err) => {
-                console.error(err);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Update failed!',
-                    text: err.message,
-                });
+            } else {
+                throw new Error(res.data.message || 'Update failed');
+            }
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Update failed!',
+                text: err.message,
             });
+        }
     };
+
 
     const role = 'User / Tourist';
 

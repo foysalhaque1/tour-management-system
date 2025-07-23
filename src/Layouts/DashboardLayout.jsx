@@ -49,6 +49,8 @@ const DashboardLayout = () => {
                         <li><NavLink to="/dashboard/userManageProfile">User Manage Profile</NavLink></li>
                         <li><NavLink to={`/dashboard/myBookings/${user.email}`} >User My Booking Page</NavLink></li>
                         <li><NavLink to="/dashboard/userAddStories">User Add Stories</NavLink></li>
+                        <li><NavLink to={`/dashboard/userManageStories/${user.email}`}>User Manage Stories</NavLink></li>
+                        <li><NavLink to="/dashboard/joinAsTourGuide">Join As Tour Guide</NavLink></li>
                     </div>
                     <div className='Admin'>
 
@@ -62,6 +64,7 @@ const DashboardLayout = () => {
 
                         <li><NavLink to="/dashboard/tourGuideAddStories">Tour Guide Add Stories</NavLink></li>
                         <li><NavLink to="/dashboard/manageTourGuideStories">Manage Tour Guide  Stories</NavLink></li>
+                        <li><NavLink to={`/dashboard/assignedTours/${user.email}`}>Tour Guide Assigned Tours</NavLink></li>
                     </div>
                 </ul>
             </div>
