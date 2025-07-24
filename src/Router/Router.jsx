@@ -27,6 +27,9 @@ import AdminManageProfile from "../Pages/Dashboard/AdminManageProfile/AdminManag
 import AdminManageUsers from "../Pages/Dashboard/AdminManageUsers/AdminManageUsers";
 import AdminRoute from "../Hooks/AdminRoute";
 import TourGuideAdminRoute from "../Hooks/TourGuideAdminRoute";
+import CommunityPage from "../Pages/CommunityPage/CommunityPage";
+import AllTripsPage from "../Pages/AllTripsPage/AllTripsPage";
+import AboutUs from "../Pages/AboutUs/AboutUs";
 
 
 
@@ -58,6 +61,18 @@ export const router = createBrowserRouter([
       {
         path: 'allStories',
         element: <AllStories></AllStories>
+      },
+      {
+        path: '/communityPage',
+        element: <CommunityPage></CommunityPage>
+      },
+      {
+        path: '/trips',
+        element: <AllTripsPage></AllTripsPage>
+      },
+      {
+        path: '/aboutUs',
+        element:<AboutUs></AboutUs>
       },
     ]
   },

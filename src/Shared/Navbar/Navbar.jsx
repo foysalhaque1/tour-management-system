@@ -27,9 +27,9 @@ const Navbar = () => {
 
     const navItems = <>
         <NavLink className={'mr-2'} to={'/'}>Home</NavLink>
-        <NavLink className={'mr-2'} >Community</NavLink>
-        <NavLink className={'mr-2'}  >About Us</NavLink>
-        <NavLink className={'mr-2'} >Trips</NavLink>
+        <NavLink className={'mr-2'} to={'/communityPage'} >Community</NavLink>
+        <NavLink className={'mr-2'} to={'/aboutUs'} >About Us</NavLink>
+        <NavLink className={'mr-2'} to={'/trips'} >Trips</NavLink>
 
 
         {
