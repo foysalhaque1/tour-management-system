@@ -3,10 +3,12 @@ import Swal from 'sweetalert2';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import useAxiosInstanceSecure from '../../../Hooks/useAxiosInstanceSecure';
 
 const AdminManageProfile = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxiosInstanceSecure();
     const queryClient = useQueryClient();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [form, setForm] = useState({});
@@ -40,7 +42,7 @@ const AdminManageProfile = () => {
     const { data: stats = {}, isLoading: statsLoading } = useQuery({
         queryKey: ['admin-stats'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/admin/stats');
+            const res = await axiosInstance.get('/admin/stats');
             return res.data;
         }
     });

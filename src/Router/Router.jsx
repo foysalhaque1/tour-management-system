@@ -25,6 +25,8 @@ import AllStories from "../Pages/AllStoriesOfUsers/AllStories";
 import TourGuideAssignedTours from "../Pages/Dashboard/TourGuideAssignedTours/TourGuideAssignedTours";
 import AdminManageProfile from "../Pages/Dashboard/AdminManageProfile/AdminManageProfile";
 import AdminManageUsers from "../Pages/Dashboard/AdminManageUsers/AdminManageUsers";
+import AdminRoute from "../Hooks/AdminRoute";
+import TourGuideAdminRoute from "../Hooks/TourGuideAdminRoute";
 
 
 
@@ -102,23 +104,33 @@ export const router = createBrowserRouter([
       },
       {
         path: 'addPackage',
-        element:<AddPackage></AddPackage>
+        element:<AdminRoute>
+          <AddPackage></AddPackage>
+        </AdminRoute>
       },
       {
         path: 'adminManageCandidates',
-        element: <AdminManageCandidates></AdminManageCandidates>
+        element: <AdminRoute>
+          <AdminManageCandidates></AdminManageCandidates>
+        </AdminRoute>
       },
       {
         path: 'adminManageProfile',
-        element: <AdminManageProfile></AdminManageProfile>
+        element: <AdminRoute>
+          <AdminManageProfile></AdminManageProfile>
+        </AdminRoute>
       },
       {
         path: 'manageUsers',
-        element: <AdminManageUsers></AdminManageUsers>
+        element: <AdminRoute>
+          <AdminManageUsers></AdminManageUsers>
+        </AdminRoute>
       },
       {
         path: 'tourGuideManageProfile',
-        element: <TourGuideManageProfile></TourGuideManageProfile>
+        element: <TourGuideAdminRoute>
+          <TourGuideManageProfile></TourGuideManageProfile>
+        </TourGuideAdminRoute>
       },
       {
         path: 'tourGuideAddStories',
