@@ -15,31 +15,37 @@ const TourGuideAdminRoute = ({ children }) => {
     const axiosSecure = useAxiosSecure()
 
     useEffect(() => {
-        const checkTourGuide = async () => {
-            if (!user?.email) {
-                setChecking(false);
-                return;
+    const checkTourGuide = async () => {
+        if (!user?.email) {
+            setChecking(false);
+            return;
+        }
+
+        // ✅ First check if admin
+        if (user.email === 'shahin@gmail.com') {
+            setIsTourGuide(true);
+            setChecking(false);
+            return;
+        }
+
+        try {
+            const res = await axiosSecure.get(`/tour-guides?email=${user.email}`);
+            if (res.data?.role === 'tour guide') {
+                setIsTourGuide(true);
+            } else {
+                Swal.fire('Access Denied', 'Only Tour Guides can access this page.', 'error');
             }
+        } catch (err) {
+            console.error(err);
+            Swal.fire('Error', 'Could not verify tour guide access.', 'error');
+        } finally {
+            setChecking(false);
+        }
+    };
 
-            try {
-                // ✅ Use relative URL (no need for import.meta.env)
-                const res = await axiosSecure.get(`/tour-guides?email=${user.email}`);
+    checkTourGuide();
+}, [user]);
 
-                if (res.data?.role === 'tour guide' || user.email !== 'shahin@gmail.com') {
-                    setIsTourGuide(true);
-                } else {
-                    Swal.fire('Access Denied', 'Only Tour Guides can access this page.', 'error');
-                }
-            } catch (err) {
-                console.error(err);
-                Swal.fire('Error', 'Could not verify tour guide access.', 'error');
-            } finally {
-                setChecking(false);
-            }
-        };
-
-        checkTourGuide();
-    }, [user]);
 
     if (loading || checking) return <p className="text-center py-10">Checking access...</p>;
 

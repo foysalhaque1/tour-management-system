@@ -67,7 +67,7 @@ const DashboardLayout = () => {
 
                         <li><NavLink to="/dashboard/tourGuideAddStories">Tour Guide Add Stories</NavLink></li>
                         <li><NavLink to="/dashboard/manageTourGuideStories">Manage Tour Guide  Stories</NavLink></li>
-                        <li><NavLink to={`/dashboard/assignedTours/${user.email}`}>Tour Guide Assigned Tours</NavLink></li>
+                        <li><NavLink to="/dashboard/assignedTours">Tour Guide Assigned Tours</NavLink></li>
                     </div>
                 </ul>
             </div>

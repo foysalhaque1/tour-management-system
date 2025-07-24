@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home></Home>
       },
-      
+
       {
         path: '/packages/:id',
         element: <PrivateRoute>
@@ -104,7 +104,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'addPackage',
-        element:<AdminRoute>
+        element: <AdminRoute>
           <AddPackage></AddPackage>
         </AdminRoute>
       },
@@ -134,17 +134,25 @@ export const router = createBrowserRouter([
       },
       {
         path: 'tourGuideAddStories',
-        element: <TourGuideAddStories></TourGuideAddStories>
+        element: <TourGuideAdminRoute>
+          <TourGuideAddStories></TourGuideAddStories>
+        </TourGuideAdminRoute>
       },
       {
         path: 'manageTourGuideStories',
-        element: <TourGuideManageStories></TourGuideManageStories>
+        element: <TourGuideAdminRoute>
+          <TourGuideManageStories></TourGuideManageStories>
+        </TourGuideAdminRoute>
       },
       {
-        path: 'assignedTours/:email',
-        element: <TourGuideAssignedTours></TourGuideAssignedTours>,
-        loader:({params})=>fetch(`http://localhost:5000/assignedTours/${params.email}`)
+        path: 'assignedTours',
+        element: (
+          <TourGuideAdminRoute>
+            <TourGuideAssignedTours />
+          </TourGuideAdminRoute>
+        ),
       },
+
       {
         path: 'updateStory/:id',
         element: <TourGuideUpdateStory></TourGuideUpdateStory>

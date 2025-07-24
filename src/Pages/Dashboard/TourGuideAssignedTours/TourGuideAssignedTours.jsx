@@ -1,10 +1,42 @@
-import React from 'react';
-import { useLoaderData } from 'react-router';
+import React, { useEffect, useState } from 'react';
+// import { useLoaderData } from 'react-router';
 import Swal from 'sweetalert2';
+import useAuth from '../../../Hooks/useAuth';
 
 
 const TourGuideAssignedTours = () => {
-    const assignedTours = useLoaderData();
+    // const assignedTours = useLoaderData();
+
+    const { user } = useAuth();
+    const [assignedTours, setAssignedTours] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchTours = async () => {
+            try {
+                const url =
+                    user.email === 'shahin@gmail.com'
+                        ? 'http://localhost:5000/assignedTours' // get all assigned tours
+                        : `http://localhost:5000/assignedTours/${user.email}`; // get only own tours
+
+                const res = await fetch(url);
+                const data = await res.json();
+                setAssignedTours(data);
+            } catch (err) {
+                console.error(err);
+                Swal.fire('Error', 'Could not load assigned tours', 'error');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (user?.email) {
+            fetchTours();
+        }
+    }, [user]);
+
+    if (loading) return <p className="text-center py-10">Loading tours...</p>;
+
 
     const handleAccept = async (id) => {
         try {

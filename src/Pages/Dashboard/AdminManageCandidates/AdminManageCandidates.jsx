@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import Swal from 'sweetalert2';
@@ -8,13 +8,20 @@ const AdminManageCandidates = () => {
     const axiosSecure = useAxiosSecure();
     const qc = useQueryClient();
 
-    const { data: users = [], isLoading } = useQuery({
-        queryKey: ['applications'],
+    const [page, setPage] = useState(1);
+    const limit = 10;
+
+    const { data = {}, isLoading } = useQuery({
+        queryKey: ['applications', page],
         queryFn: async () => {
-            const res = await axiosSecure.get('/tourGuideApplication');
+            const res = await axiosSecure.get(`/tourGuideApplication?page=${page}&limit=${limit}`);
             return res.data;
         }
     });
+
+    const users = data.data || [];
+    const total = data.total || 0;
+    const totalPages = Math.ceil(total / limit);
 
     const acceptMutation = useMutation({
         mutationFn: async (id) => {
@@ -117,6 +124,62 @@ const AdminManageCandidates = () => {
                     </tbody>
                 </table>
             </div>
+
+            {/* Pagination Footer */}
+            {/* Pagination Footer (Styled to match provided image) */}
+            <div className="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p className="text-sm text-gray-600">
+                    Showing {(page - 1) * limit + 1}–{Math.min(page * limit, total)} of <strong>{total}</strong>
+                </p>
+                <div className="flex items-center border rounded-md shadow-sm overflow-hidden text-sm">
+                    <button
+                        disabled={page === 1}
+                        onClick={() => setPage(page - 1)}
+                        className="px-3 py-1.5 text-gray-600 hover:bg-gray-100 disabled:text-gray-300 disabled:cursor-not-allowed"
+                    >
+                        &lsaquo;
+                    </button>
+
+                    {page > 2 && (
+                        <>
+                            <button onClick={() => setPage(1)} className="px-3 py-1.5 hover:bg-gray-100">1</button>
+                            <span className="px-2">...</span>
+                        </>
+                    )}
+
+                    {page > 1 && (
+                        <button onClick={() => setPage(page - 1)} className="px-3 py-1.5 hover:bg-gray-100">
+                            {page - 1}
+                        </button>
+                    )}
+
+                    <button className="px-3 py-1.5 bg-blue-100 text-blue-700 font-medium">
+                        {page}
+                    </button>
+
+                    {page < totalPages && (
+                        <button onClick={() => setPage(page + 1)} className="px-3 py-1.5 hover:bg-gray-100">
+                            {page + 1}
+                        </button>
+                    )}
+
+                    {page < totalPages - 1 && (
+                        <>
+                            <span className="px-2">...</span>
+                            <button onClick={() => setPage(totalPages)} className="px-3 py-1.5 hover:bg-gray-100">{totalPages}</button>
+                        </>
+                    )}
+
+                    <button
+                        disabled={page === totalPages}
+                        onClick={() => setPage(page + 1)}
+                        className="px-3 py-1.5 text-gray-600 hover:bg-gray-100 disabled:text-gray-300 disabled:cursor-not-allowed"
+                    >
+                        &rsaquo;
+                    </button>
+                </div>
+            </div>
+
         </div>
     );
 };
