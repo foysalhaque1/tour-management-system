@@ -9,10 +9,10 @@ import TabSection from '../../TabSection/TabSection';
 
 const Home = () => {
     return (
-        <div>
+        <div className='mt-4'>
             <Banner></Banner>
             {/* Our packages */}
-            <div>
+            <div className='my-4'>
                 <TabSection></TabSection>
                
                 <TouristStorySection></TouristStorySection>

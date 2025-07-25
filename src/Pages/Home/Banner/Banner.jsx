@@ -7,22 +7,28 @@ import banner3 from '../../../assets/Yellow Green Modern Destination Medium Bann
 
 const Banner = () => {
     return (
-       <Carousel autoPlay={true} infiniteLoop={true} showThumbs={false}>
-                <div>
-                    <img src={banner1} />
-                    
-                </div>
-                <div>
-                    <img src={banner2} />
-                    
-                </div>
-                <div>
-                    <img src={banner3} />
-                  
-                </div>
-            </Carousel>
-          
-            
+        <Carousel
+
+
+            showStatus={false}
+            interval={4000}
+            dynamicHeight={false}
+            className="rounded-xl overflow-hidden" autoPlay={true} infiniteLoop={true} showThumbs={false}>
+            <div>
+                <img className="w-full h-[500px] object-cover" src={banner1} />
+
+            </div>
+            <div>
+                <img className="w-full h-[500px] object-cover" src={banner2} />
+
+            </div>
+            <div>
+                <img className="w-full h-[500px] object-cover" src={banner3} />
+
+            </div>
+        </Carousel>
+
+
     );
 };
 

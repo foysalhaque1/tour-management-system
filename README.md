@@ -1,12 +1,20 @@
 # React + Vite
+Name of website: Explore Tours
+Admin:shahin@gmail.com
+username:shahin
+password:123456*Fh
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Feature of our website:
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1.Here we use react framework,use express,node.js for backend.
+2.For database storing i use mongodb.
+3.Here user can see the packages which i provided.
+4.By clicking the package details it will show the package price,the tour guide,daywise plan of tour,tour info section.
+5.A submit booking option is available.Stripe payment is used for user's booking payment.
+6.In package details page the user can see the tour guide details and their travel stories.
+7.Here user's can share the stories on facebook.
+8.A tourist can apply as a tour guide by clicking apply as tourGuide button .if admin accept then the user's role will be 
+tour guide and he/she can access the tourguide dashboard.
+9.The tour guide can accept or reject the assigned tour.
+10.for login,register firebase authentication funtion is used. Here also Firebase jwt token is used for admin stat to secure 
+the confidential api.
