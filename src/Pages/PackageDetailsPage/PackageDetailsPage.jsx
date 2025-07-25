@@ -8,6 +8,7 @@ import { useNavigate, useParams } from 'react-router';
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from '../../Hooks/useAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { toast } from 'react-toastify';
 
 const PackageDetailsPage = () => {
     const { id } = useParams();
@@ -49,7 +50,7 @@ const PackageDetailsPage = () => {
 
     const onSubmit = async (data) => {
         if (!selectedDate || !data.guideId) {
-            alert("Please select a tour date and a guide.");
+            toast.error("Please select a tour date and a guide.");
             return;
         }
 
@@ -76,14 +77,14 @@ const PackageDetailsPage = () => {
             }
         } catch (err) {
             console.error('Booking failed:', err);
-            alert('Booking failed. Please try again.');
+            toast.error('Booking failed. Please try again.');
         }
         try {
             const res = await axiosSecure.post('/assignedTours', bookingData);
            console.log(res)
         } catch (err) {
             console.error('Booking failed:', err);
-            alert('Booking failed. Please try again.');
+            toast.error('Booking failed. Please try again.');
         }
     };
 

@@ -56,7 +56,7 @@ const Navbar = () => {
                 </div>
                 <div className="btn btn-ghost text-xl mb-4 mt-4">
                     <TourLogo />
-                    <p className="text-4xl font-bold">Explore Tours</p>
+                    <p className="text-xl md:text-2xl  lg:text-4xl font-bold">Explore Tours</p>
                 </div>
             </div>
 

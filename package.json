@@ -29,6 +29,7 @@
     "react-select": "^5.10.2",
     "react-share": "^5.2.2",
     "react-tabs": "^6.1.0",
+    "react-toastify": "^11.0.5",
     "sweetalert2": "^11.6.13",
     "tailwindcss": "^4.1.11",
     "uuid": "^11.1.0"

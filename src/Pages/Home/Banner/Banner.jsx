@@ -15,15 +15,15 @@ const Banner = () => {
             dynamicHeight={false}
             className="rounded-xl overflow-hidden" autoPlay={true} infiniteLoop={true} showThumbs={false}>
             <div>
-                <img className="w-full h-[500px] object-cover" src={banner1} />
+                <img className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] object-cover" src={banner1} />
 
             </div>
             <div>
-                <img className="w-full h-[500px] object-cover" src={banner2} />
+                <img className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] object-cover" src={banner2} />
 
             </div>
             <div>
-                <img className="w-full h-[500px] object-cover" src={banner3} />
+                <img className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] object-cover" src={banner3} />
 
             </div>
         </Carousel>
