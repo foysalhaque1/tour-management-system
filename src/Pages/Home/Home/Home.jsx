@@ -6,11 +6,15 @@ import TouristStorySection from '../../TouristStorySection/TouristStorySection';
 import HeroSection1 from '../../OtherSection1/OtherSection1';
 import WhyTravelWithUs from '../../OtherSection2/OtherSection2';
 import TabSection from '../../TabSection/TabSection';
+import OverviewSection from '../../OverViewSection/OverViewSection';
 
 const Home = () => {
     return (
         <div className='mt-4'>
             <Banner></Banner>
+            <div className='mt-4'>
+                <OverviewSection></OverviewSection>
+            </div>
             {/* Our packages */}
             <div className='my-4'>
                 <TabSection></TabSection>

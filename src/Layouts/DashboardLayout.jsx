@@ -3,10 +3,13 @@ import { NavLink, Outlet } from 'react-router';
 
 import TourLogo from '../Shared/TourLogo/TourLogo';
 import useAuth from '../Hooks/useAuth';
+import Footer from '../Shared/Footer/Footer';
 
 const DashboardLayout = () => {
     const {user} = useAuth();
     return (
+        <div>
+
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
@@ -71,6 +74,8 @@ const DashboardLayout = () => {
                     </div>
                 </ul>
             </div>
+        </div>
+        <Footer></Footer>
         </div>
     );
 };
