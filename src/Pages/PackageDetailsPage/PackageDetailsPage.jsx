@@ -109,7 +109,7 @@ const PackageDetailsPage = () => {
             {/* Tour Info */}
             <div className="mb-6">
                 <h3 className="text-xl font-semibold mb-2">Tour Information</h3>
-                <p>{pkg.tourInfo}</p>
+                <p>{pkg.info}</p>
             </div>
 
             {/* Tour Plan */}
