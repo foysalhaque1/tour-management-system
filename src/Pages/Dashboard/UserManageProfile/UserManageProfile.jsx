@@ -8,7 +8,7 @@ import { Link } from 'react-router';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const UserManageProfile = () => {
-    const { user } = useAuth();
+    const { user,update } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { register, handleSubmit, reset } = useForm();
 
@@ -19,35 +19,46 @@ const UserManageProfile = () => {
 
     const axiosSecure = useAxiosSecure()
 
-    const onSubmit = async (data) => {
-        try {
-            const res = await axiosSecure.put(`/users/profile/${user.email}`, {
-                displayName: data.name,
-                photoURL: data.image,
-                email: user.email,
-                role: 'user',
-            });
+   const onSubmit = async (data) => {
+  try {
+    const res = await axiosSecure.put(`/users/profile/${user.email}`, {
+      displayName: data.name,
+      photoURL: data.image,
+      role: 'user',
+    });
 
-            if (res.data.success) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Profile Updated Successfully!',
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                setIsModalOpen(false);
-            } else {
-                throw new Error(res.data.message || 'Update failed');
-            }
-        } catch (err) {
-            console.error(err);
-            Swal.fire({
-                icon: 'error',
-                title: 'Update failed!',
-                text: err.message,
-            });
-        }
-    };
+    if (res.data.success) {
+      // ✅ Update Firebase Auth profile too
+      await update( {
+        displayName: data.name,
+        photoURL: data.image,
+      });
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Profile Updated Successfully!',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      setIsModalOpen(false);
+
+      // ✅ Refresh the page or trigger a re-fetch of user info
+      window.location.reload(); // optional, or re-fetch user in context
+
+    } else {
+      throw new Error(res.data.message || 'Update failed');
+    }
+  } catch (err) {
+    console.error(err);
+    Swal.fire({
+      icon: 'error',
+      title: 'Update failed!',
+      text: err.message,
+    });
+  }
+};
+
 
     useEffect(() => {
         const saveUser = async () => {

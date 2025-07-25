@@ -16,10 +16,12 @@ const TourGuideManageProfile = () => {
         queryKey: ['tourGuide', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get('/tourGuides');
+            console.log(res.data)
             return res.data.find(g => g.email === user?.email) || {};
         },
         enabled: !!user?.email
     });
+    console.log(guide)
 
     const updateMutation = useMutation({
         mutationFn: async (updated) => {
