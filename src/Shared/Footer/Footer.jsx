@@ -7,7 +7,7 @@ const Footer = () => {
             <aside>
                 <TourLogo />
                 <p className="font-bold">
-                    Wanderlust Travels
+                    Explore Tours
                     <br />
                     Your Gateway to the World's Best Adventures
                 </p>

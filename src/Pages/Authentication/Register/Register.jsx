@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../Hooks/useAuth';
-import { Link } from 'react-router'; // unchanged
+import { Link, useNavigate } from 'react-router'; // unchanged
 import Swal from 'sweetalert2'; // ✅ added SweetAlert2
 import SocialLogIn from '../SocialLogIn/SocialLogIn';
 
@@ -9,32 +9,40 @@ const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, update } = useAuth();
 
+    const navigate = useNavigate();
+
     const onSubmit = data => {
-        console.log(data);
         createUser(data.email, data.password)
             .then(res => {
-                console.log(res.user);
-
-                // ✅ Update profile with name & photo
+                console.log(res)
                 update({
                     displayName: data.name,
                     photoURL: data.image
                 }).then(() => {
-                    // ✅ Show success SweetAlert
+                    // ✅ Show alert and navigate after confirmation
                     Swal.fire({
                         icon: 'success',
                         title: 'Registration Successful!',
                         text: 'Welcome aboard!',
                         confirmButtonColor: '#4f46e5'
+                    }).then(() => {
+                        navigate('/'); // ✅ Go to homepage after alert
                     });
                 }).catch(err => {
                     console.error('Profile update failed:', err);
                 });
-
             }).catch(error => {
                 console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Registration Failed',
+                    text: error.message,
+                    confirmButtonColor: '#ef4444'
+                });
             });
     };
+
+
 
     return (
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
