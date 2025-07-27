@@ -52,15 +52,17 @@ const TourGuideManageStories = () => {
                         {story.images && story.images.length > 0 && (
                             <figure>
                                 <img
-                                    src={`http://localhost:5000/uploads/${story.images[0]}`}
+                                    src={story.images[0]} // 
                                     alt="Story Thumbnail"
                                     className="h-52 w-full object-cover"
+                                    onError={(e) => e.target.src = 'https://via.placeholder.com/400x300?text=No+Image'}
                                 />
                             </figure>
                         )}
                         <div className="card-body">
                             <h2 className="card-title">{story.title}</h2>
                             <p className="text-sm text-gray-600">{story.storyText.slice(0, 100)}...</p>
+                            <p>By:{story.email}</p>
                             <div className="card-actions justify-end mt-4">
                                 <Link
                                     to={`/dashboard/updateStory/${story._id}`}
@@ -77,7 +79,6 @@ const TourGuideManageStories = () => {
                                             Swal.fire('Error!', 'Invalid story ID.', 'error');
                                         }
                                     }}
-
                                     className="btn btn-error btn-sm text-white"
                                 >
                                     Delete

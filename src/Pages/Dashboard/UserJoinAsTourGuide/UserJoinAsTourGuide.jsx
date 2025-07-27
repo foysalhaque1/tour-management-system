@@ -13,9 +13,7 @@ const UserJoinAsTourGuide = () => {
 
     const mutation = useMutation({
         mutationFn: async (formData) => {
-            const res = await axiosSecure.post('/tourGuideApplication', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
+            const res = await axiosSecure.post('/tourGuideApplication', formData);
             return res.data;
         },
         onSuccess: () => {
@@ -38,13 +36,14 @@ const UserJoinAsTourGuide = () => {
     });
 
     const onSubmit = (data) => {
-        const formData = new FormData();
-        formData.append('name', user?.displayName);
-        formData.append('email', user?.email);
-        formData.append('photo', user?.photoURL); // ✅ Add user photo
-        formData.append('title', data.title);
-        formData.append('reason', data.reason);
-        formData.append('cv', data.cv[0]); // CV file upload
+        const formData = {
+            name: user?.displayName,
+            email: user?.email,
+            photo: user?.photoURL,
+            title: data.title,
+            reason: data.reason,
+            cv: data.cvLink, // ✅ Now using link instead of file
+        };
 
         mutation.mutate(formData);
     };
@@ -100,16 +99,19 @@ const UserJoinAsTourGuide = () => {
                         {errors.reason && <p className="text-red-500 text-sm mt-1">{errors.reason.message}</p>}
                     </div>
 
-                    {/* CV Upload */}
+                    {/* CV Link */}
                     <div>
-                        <label className="label font-semibold">Upload CV (PDF)</label>
+                        <label className="label font-semibold">CV Link (Google Drive, Dropbox, etc.)</label>
                         <input
-                            type="file"
-                            accept=".pdf"
-                            {...register('cv', { required: 'CV is required' })}
-                            className="file-input file-input-bordered w-full"
+                            type="url"
+                            placeholder="https://example.com/your-cv"
+                            {...register('cvLink', {
+                                required: 'CV link is required',
+                               
+                            })}
+                            className="input input-bordered w-full"
                         />
-                        {errors.cv && <p className="text-red-500 text-sm mt-1">{errors.cv.message}</p>}
+                        {errors.cvLink && <p className="text-red-500 text-sm mt-1">{errors.cvLink.message}</p>}
                     </div>
 
                     {/* Submit Button */}

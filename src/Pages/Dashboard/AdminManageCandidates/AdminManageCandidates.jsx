@@ -89,13 +89,12 @@ const AdminManageCandidates = () => {
                                 <td className="py-2 px-4">
                                     {u.cv ? (
                                         <a
-                                            href={`http://localhost:5000/uploads/${u.cv}`}
+                                            href={u.cv}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-blue-600 hover:underline"
-                                            download
                                         >
-                                            Download CV
+                                            View CV
                                         </a>
                                     ) : (
                                         <span className="text-gray-400">No CV</span>

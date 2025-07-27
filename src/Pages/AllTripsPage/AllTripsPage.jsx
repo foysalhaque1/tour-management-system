@@ -30,12 +30,13 @@ const AllTripsPage = () => {
                             {pkg.photos && pkg.photos[0] && (
                                 <figure>
                                     <img
-                                        src={`http://localhost:5000/uploads/${pkg.photos[0]}`}
+                                        src={pkg.photos[0]}
                                         alt="Tour"
                                         className="h-48 w-full object-cover rounded-t-lg"
                                     />
                                 </figure>
                             )}
+
                             <div className="card-body">
                                 <h2 className="card-title capitalize text-gray-800">{pkg.tourType}</h2>
                                 <p className="text-lg font-semibold text-primary">${pkg.price}</p>

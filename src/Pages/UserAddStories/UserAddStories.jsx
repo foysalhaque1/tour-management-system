@@ -1,52 +1,51 @@
 import React, { useState } from 'react';
-
 import Swal from 'sweetalert2';
-
-
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
-import useAuth from '../../../Hooks/useAuth';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+
+
+import useAuth from '../../Hooks/useAuth';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const UserAddStories = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [images, setImages] = useState([]);
+
     const {
         register,
         handleSubmit,
         formState: { errors },
-        reset
+        reset,
     } = useForm();
 
-    const handleImageChange = (e) => {
-        setImages([...e.target.files]);
-    };
-
     const onSubmit = async (data) => {
-        if (!images.length) {
-            Swal.fire('Missing Images', 'Please upload at least one image.', 'warning');
+        const imageLinks = data.imageLinks
+            .split('\n')
+            .map((link) => link.trim())
+            .filter((link) => link);
+
+        if (!imageLinks.length) {
+            Swal.fire('Missing Images', 'Please enter at least one image link.', 'warning');
             return;
         }
 
-        const formData = new FormData();
-        formData.append('email', user.email);
-        formData.append('title', data.title);
-        formData.append('storyText', data.storyText);
-        images.forEach((img) => formData.append('images', img));
-
         try {
             setLoading(true);
-            const res = await axiosSecure.post('/user/addStories', formData);
+            const res = await axiosSecure.post('/add/stories', {
+                email: user.email,
+                title: data.title,
+                storyText: data.storyText,
+                imageLinks,
+            });
+
             const responseData = res.data;
 
             if (responseData.success) {
                 Swal.fire('Success!', 'Story added successfully.', 'success');
                 reset();
-                setImages([]);
-                navigate(`/dashboard/userManageStories/${user.email}`);
+                 navigate(`/dashboard/userManageStories/${user.email}`);
             } else {
                 Swal.fire('Error', responseData.message || 'Something went wrong', 'error');
             }
@@ -86,15 +85,14 @@ const UserAddStories = () => {
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-medium mb-1">Upload Images</label>
-                        <input
-                            type="file"
-                            multiple
-                            accept="image/*"
-                            onChange={handleImageChange}
-                            className="file-input file-input-bordered w-full"
-                        />
-                        {images.length === 0 && <p className="text-red-500 text-sm mt-1">Please select at least one image.</p>}
+                        <label className="block text-gray-700 font-medium mb-1">Image Links (one per line)</label>
+                        <textarea
+                            rows="3"
+                            className="textarea textarea-bordered w-full"
+                            placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
+                            {...register('imageLinks', { required: 'At least one image link is required' })}
+                        ></textarea>
+                        {errors.imageLinks && <p className="text-red-500 text-sm mt-1">{errors.imageLinks.message}</p>}
                     </div>
 
                     <button

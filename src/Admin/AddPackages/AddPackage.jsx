@@ -8,32 +8,29 @@ const AddPackage = () => {
   const { user } = useAuth();
   const { register, handleSubmit, control, watch } = useForm({
     defaultValues: {
+      photos: [{ url: "" }], // now an array of image URLs
       tourPlan: [{ day: "", description: "" }]
     }
   });
 
   const axiosSecure = useAxiosSecure();
-  const { fields, append, remove } = useFieldArray({ control, name: "tourPlan" });
+  const { fields: photoFields, append: appendPhoto, remove: removePhoto } = useFieldArray({ control, name: "photos" });
+  const { fields: planFields, append: appendPlan, remove: removePlan } = useFieldArray({ control, name: "tourPlan" });
+
   const selectedTourType = watch("tourType");
 
   const onSubmit = async (data) => {
-    const formData = new FormData();
-    for (let i = 0; i < data.photos.length; i++) {
-      formData.append('photos', data.photos[i]);
-    }
-
-    formData.append('tourType', data.tourType);
-    formData.append('price', data.price);
-    formData.append('info', data.info);
-    formData.append('email', user.email);
-    formData.append('tourPlan', JSON.stringify(data.tourPlan));
-
     try {
-      const res = await axiosSecure.post('/addPackage', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
+      const payload = {
+        tourType: data.tourType,
+        price: parseFloat(data.price),
+        info: data.info,
+        email: user.email,
+        tourPlan: data.tourPlan,
+        photos: data.photos.map(p => p.url) // extract URLs
+      };
+
+      const res = await axiosSecure.post('/addPackage', payload);
 
       if (res.data.insertedId) {
         Swal.fire({
@@ -56,17 +53,27 @@ const AddPackage = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 p-6 max-w-2xl mx-auto">
 
+      {/* Image Links */}
       <div className="form-control">
-        <label className="label font-semibold">Tour Images</label>
-        <input
-          {...register("photos")}
-          type="file"
-          multiple
-          accept="image/*"
-          className="file-input file-input-bordered w-full"
-        />
+        <label className="label font-semibold">Tour Image Links</label>
+        <div className="space-y-2">
+          {photoFields.map((item, index) => (
+            <div key={item.id} className="flex gap-2 items-center">
+              <input
+                {...register(`photos[${index}].url`)}
+                placeholder="Enter Image URL"
+                className="input input-bordered w-full"
+              />
+              <button type="button" onClick={() => removePhoto(index)} className="btn btn-error btn-sm">X</button>
+            </div>
+          ))}
+        </div>
+        <button type="button" onClick={() => appendPhoto({ url: "" })} className="btn btn-outline mt-2">
+          + Add Image Link
+        </button>
       </div>
 
+      {/* Tour Type */}
       <div className="form-control">
         <label className="label font-semibold">Tour Type</label>
         <select {...register("tourType")} className="select select-bordered w-full">
@@ -81,6 +88,7 @@ const AddPackage = () => {
         )}
       </div>
 
+      {/* Price */}
       <div className="form-control">
         <label className="label font-semibold">Price (USD)</label>
         <input
@@ -91,6 +99,7 @@ const AddPackage = () => {
         />
       </div>
 
+      {/* Tour Info */}
       <div className="form-control">
         <label className="label font-semibold">Tour Information</label>
         <textarea
@@ -100,10 +109,11 @@ const AddPackage = () => {
         />
       </div>
 
+      {/* Tour Plan */}
       <div className="form-control">
         <label className="label font-semibold">Day-wise Tour Plan</label>
         <div className="space-y-2">
-          {fields.map((item, index) => (
+          {planFields.map((item, index) => (
             <div key={item.id} className="flex gap-2 items-center">
               <input
                 {...register(`tourPlan[${index}].day`)}
@@ -115,11 +125,11 @@ const AddPackage = () => {
                 placeholder="Description"
                 className="input input-bordered w-2/3"
               />
-              <button type="button" onClick={() => remove(index)} className="btn btn-error btn-sm">X</button>
+              <button type="button" onClick={() => removePlan(index)} className="btn btn-error btn-sm">X</button>
             </div>
           ))}
         </div>
-        <button type="button" onClick={() => append({ day: "", description: "" })} className="btn btn-outline mt-2">
+        <button type="button" onClick={() => appendPlan({ day: "", description: "" })} className="btn btn-outline mt-2">
           + Add Day
         </button>
       </div>

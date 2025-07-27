@@ -81,7 +81,7 @@ const PackageDetailsPage = () => {
         }
         try {
             const res = await axiosSecure.post('/assignedTours', bookingData);
-           console.log(res)
+            console.log(res)
         } catch (err) {
             console.error('Booking failed:', err);
             toast.error('Booking failed. Please try again.');
@@ -97,13 +97,14 @@ const PackageDetailsPage = () => {
                     {pkg.photos?.map((photo, index) => (
                         <img
                             key={index}
-                            src={`http://localhost:5000/uploads/${photo}`}
+                            src={photo}  // ✅ Now using direct URL
                             alt={`photo-${index}`}
                             className="w-full h-64 object-cover rounded"
                             onError={(e) => e.target.src = "/default-tour.jpg"}
                         />
                     ))}
                 </div>
+
             </div>
 
             {/* Tour Info */}

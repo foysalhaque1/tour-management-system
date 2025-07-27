@@ -5,13 +5,13 @@ import useAuth from '../../Hooks/useAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const CommunityPage = () => {
-    const { user } = useAuth(); // must return user object if logged in
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
     const { data: stories = [], isLoading, isError } = useQuery({
         queryKey: ['allStories'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/users/storiesAll'); 
+            const res = await axiosSecure.get('/users/storiesAll');
             return res.data;
         }
     });
@@ -25,13 +25,17 @@ const CommunityPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {stories.map((story) => (
                     <div key={story._id} className="card bg-base-100 shadow-xl">
-                        {story.images && (
-                            <figure>
-                                <img
-                                    src={`http://localhost:5000/uploads/${story.images}`}
-                                    alt={story.title}
-                                    className="w-full h-56 object-cover"
-                                />
+                        {story.images?.length > 0 && (
+                            <figure className="flex flex-wrap gap-2 p-2">
+                                {story.images.map((img, index) => (
+                                    <img
+                                        key={index}
+                                        src={img}
+                                        alt={story.title}
+                                        className="w-full h-40 object-cover rounded"
+                                        onError={(e) => (e.target.src = "/default-image.png")}
+                                    />
+                                ))}
                             </figure>
                         )}
                         <div className="card-body">

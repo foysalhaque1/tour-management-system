@@ -18,7 +18,7 @@ import PackageDetailsPage from "../Pages/PackageDetailsPage/PackageDetailsPage";
 import TourGuideProfilePage from "../Pages/TourGuideProfilePage/TourGuideProfilePage";
 import UserBookingPage from "../Pages/Dashboard/UserBookingPage/UserBookingPage";
 import Payment from "../Pages/Payment/Payment";
-import UserAddStories from "../Pages/Dashboard/UserAddStories/UserAddStories";
+
 import UserManageStories from "../Pages/Dashboard/UserManageStories/UserManageStories";
 import UserUpdateStory from "../Pages/Dashboard/UserUpdateStory/UserUpdateStory";
 import AllStories from "../Pages/AllStoriesOfUsers/AllStories";
@@ -30,6 +30,7 @@ import TourGuideAdminRoute from "../Hooks/TourGuideAdminRoute";
 import CommunityPage from "../Pages/CommunityPage/CommunityPage";
 import AllTripsPage from "../Pages/AllTripsPage/AllTripsPage";
 import AboutUs from "../Pages/AboutUs/AboutUs";
+import UserAddStories from "../Pages/UserAddStories/UserAddStories";
 
 
 
@@ -58,6 +59,7 @@ export const router = createBrowserRouter([
         path: 'payment/:id',
         element: <Payment></Payment>
       },
+      
       {
         path: 'allStories',
         element: <AllStories></AllStories>
@@ -72,7 +74,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/aboutUs',
-        element:<AboutUs></AboutUs>
+        element: <AboutUs></AboutUs>
       },
     ]
   },
@@ -107,12 +109,14 @@ export const router = createBrowserRouter([
       },
       {
         path: 'userManageStories/:email',
-        element: <UserManageStories></UserManageStories>
+        element: <UserManageStories></UserManageStories>,
+
       },
-      {
+       {
         path: 'userUpdateStory/:id',
         element: <UserUpdateStory></UserUpdateStory>
       },
+
       {
         path: 'joinAsTourGuide',
         element: <UserJoinAsTourGuide></UserJoinAsTourGuide>

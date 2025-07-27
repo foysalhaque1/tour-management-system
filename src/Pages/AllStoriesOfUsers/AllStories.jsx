@@ -39,12 +39,14 @@ const AllStories = () => {
                             {story.imageUrls?.slice(0, 3).map((img, i) => (
                                 <img
                                     key={i}
-                                    src={img}
+                                    src={img} // ✅ now this is a full URL already
                                     alt="Story"
                                     className="w-24 h-24 object-cover rounded"
+                                    onError={(e) => (e.target.src = "/fallback.jpg")} // optional fallback
                                 />
                             ))}
                         </div>
+
                         <p className="text-sm text-gray-500">Posted by: {story.email}</p>
 
                         {user ? (

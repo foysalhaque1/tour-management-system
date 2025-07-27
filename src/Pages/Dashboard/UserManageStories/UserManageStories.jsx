@@ -8,7 +8,7 @@ import useAuth from '../../../Hooks/useAuth';
 
 const UserManageStories = () => {
     const axiosSecure = useAxiosSecure();
-    const {user} = useAuth()
+    const { user } = useAuth()
 
     const { data: stories = [], refetch } = useQuery({
         ueryKey: ['userStories', user?.email],
@@ -16,7 +16,7 @@ const UserManageStories = () => {
             const res = await axiosSecure.get(`/users/stories?email=${user.email}`);
             return res.data;
         },
-        enabled: !!user?.email 
+        enabled: !!user?.email
     });
 
     const handleDelete = async (story, email) => {
@@ -52,10 +52,10 @@ const UserManageStories = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {stories?.map((story, idx) => (
                     <div key={idx} className="card bg-base-100 shadow-xl">
-                        {story.images && story.images.length > 0 && (
+                        {story.images && (
                             <figure>
                                 <img
-                                    src={`http://localhost:5000/uploads/${story.images[0]}`}
+                                    src={story.images[0]}
                                     alt="Story Thumbnail"
                                     className="h-52 w-full object-cover"
                                 />
@@ -64,6 +64,7 @@ const UserManageStories = () => {
                         <div className="card-body">
                             <h2 className="card-title">{story.title}</h2>
                             <p className="text-sm text-gray-600">{story.storyText.slice(0, 100)}...</p>
+                            
                             <div className="card-actions justify-end mt-4">
                                 <Link
                                     to={`/dashboard/userUpdateStory/${story._id}`}

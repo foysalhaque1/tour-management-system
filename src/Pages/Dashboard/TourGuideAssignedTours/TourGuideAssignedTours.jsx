@@ -14,8 +14,8 @@ const TourGuideAssignedTours = () => {
             try {
                 const url =
                     user.email === 'shahin@gmail.com'
-                        ? 'http://localhost:5000/assignedTours'
-                        : `http://localhost:5000/assignedTours/${user.email}`;
+                        ? 'https://tour-management-server-final.vercel.app/assignedTours'
+                        : `https://tour-management-server-final.vercel.app/assignedTours/${user.email}`;
 
                 const res = await fetch(url);
                 const data = await res.json();
@@ -35,7 +35,7 @@ const TourGuideAssignedTours = () => {
 
     const handleAccept = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5000/assignedTours/accept/${id}`, {
+            const res = await fetch(`https://tour-management-server-final.vercel.app/assignedTours/accept/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
             });
@@ -62,7 +62,7 @@ const TourGuideAssignedTours = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await fetch(`http://localhost:5000/assignedTours/reject/${id}`, {
+                    const res = await fetch(`https://tour-management-server-final.vercel.app/assignedTours/reject/${id}`, {
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
                     });

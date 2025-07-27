@@ -7,7 +7,7 @@ const useAxiosInstanceSecure = () => {
     const { user } = useAuth();
 
     const axiosSecureInstance = axios.create({
-        baseURL: `http://localhost:5000`
+        baseURL: `https://tour-management-server-final.vercel.app`
     });
 
     useEffect(() => {

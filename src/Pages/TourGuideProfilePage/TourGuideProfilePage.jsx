@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useParams } from 'react-router';
@@ -11,14 +10,12 @@ const TourGuideProfile = () => {
         queryKey: ['tourGuideProfile', id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/tourGuide/profileById/${id}`);
-            console.log(res)
             return res.data;
         }
     });
 
     if (isLoading) return <p>Loading...</p>;
-    if (isError || !guide) return <p>Profile upload problem</p>;
-    console.log(guide)
+    if (isError || !guide) return <p>Profile loading problem</p>;
 
     return (
         <div className="max-w-3xl mx-auto mt-8 p-4 bg-white shadow-lg rounded-xl">
@@ -36,7 +33,7 @@ const TourGuideProfile = () => {
                 </p>
             </div>
 
-            {/* story*/}
+            {/* Stories */}
             {guide.stories && guide.stories.length > 0 && (
                 <div className="mt-8">
                     <h3 className="text-xl font-semibold mb-4">Stories</h3>
@@ -49,7 +46,7 @@ const TourGuideProfile = () => {
                                     {story.images?.map((img, index) => (
                                         <img
                                             key={index}
-                                            src={`http://localhost:5000/uploads/${img}`}
+                                            src={img}   
                                             alt="Story"
                                             className="w-28 h-20 object-cover rounded border"
                                             onError={(e) => (e.target.src = "/default-image.png")}
