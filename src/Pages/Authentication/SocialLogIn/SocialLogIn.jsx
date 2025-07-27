@@ -1,18 +1,40 @@
 import React from 'react';
 import useAuth from '../../../Hooks/useAuth';
+import { useNavigate } from 'react-router';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const SocialLogIn = () => {
+    const navigate = useNavigate();
+    const { signInWithGoogle } = useAuth();
+    const axiosSecure = useAxiosSecure();
 
-const {signInWithGoogle} = useAuth();
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(async (res) => {
+                const googleUser = res.user;
 
-const handleGoogleSignIn = () =>{
-    signInWithGoogle().then(res=>{
-        console.log(res.user);
-    }).catch(error=>{
-        console.log(error)
-    })
+                // Prepare new user data
+                const newUser = {
+                    name: googleUser.displayName,
+                    email: googleUser.email,
+                    photo: googleUser.photoURL,
+                    role: 'user',
+                    createdAt: new Date()
+                };
 
-}
+                try {
+                    // Call backend to check & insert user
+                    await axiosSecure.post('/users', newUser);
+
+                    navigate('/');
+                } catch (err) {
+                    console.error("Error saving Google user:", err);
+                }
+            })
+            .catch((error) => {
+                console.error("Google login error:", error);
+            });
+    };
 
     return (
         <div className='text-center'>

@@ -4,43 +4,51 @@ import useAuth from '../../../Hooks/useAuth';
 import { Link, useNavigate } from 'react-router'; // unchanged
 import Swal from 'sweetalert2'; // ✅ added SweetAlert2
 import SocialLogIn from '../SocialLogIn/SocialLogIn';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, update } = useAuth();
+    const axiosSecure = useAxiosSecure();
 
     const navigate = useNavigate();
 
-    const onSubmit = data => {
-        createUser(data.email, data.password)
-            .then(res => {
-                console.log(res)
-                update({
-                    displayName: data.name,
-                    photoURL: data.image
-                }).then(() => {
-                    // ✅ Show alert and navigate after confirmation
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Registration Successful!',
-                        text: 'Welcome aboard!',
-                        confirmButtonColor: '#4f46e5'
-                    }).then(() => {
-                        navigate('/'); // ✅ Go to homepage after alert
-                    });
-                }).catch(err => {
-                    console.error('Profile update failed:', err);
-                });
-            }).catch(error => {
-                console.log(error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Registration Failed',
-                    text: error.message,
-                    confirmButtonColor: '#ef4444'
-                });
+    const onSubmit = async (data) => {
+        try {
+            const res = await createUser(data.email, data.password);
+            console.log(res)
+            await update({
+                displayName: data.name,
+                photoURL: data.image
             });
+
+            const newUser = {
+                name: data.name,
+                email: data.email,
+                photo: data.image,
+                role: "user",
+                createdAt: new Date()
+            };
+
+            await axiosSecure.post('/users', newUser);
+
+            await Swal.fire({
+                icon: 'success',
+                title: 'Registration Successful!',
+                text: 'Welcome aboard!',
+                confirmButtonColor: '#4f46e5'
+            });
+
+            navigate('/');
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.message,
+            });
+        }
     };
+
 
 
 

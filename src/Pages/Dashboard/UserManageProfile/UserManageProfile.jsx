@@ -71,7 +71,7 @@ const UserManageProfile = () => {
                 };
 
                 try {
-                    const res = await axiosSecure.put(`/usersInfo/${user.email}`, userInfo); // use PUT for upsert
+                    const res = await axiosSecure.put(`/users/profile/${user.email}`, userInfo); // use PUT for upsert
                     console.log('User saved/updated:', res.data);
                 } catch (error) {
                     console.error('Failed to save user profile:', error);
