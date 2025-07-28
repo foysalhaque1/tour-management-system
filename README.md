@@ -20,3 +20,8 @@ tour guide and he/she can access the tourguide dashboard.
 9.The tour guide can accept or reject the assigned tour.
 10.for login,register firebase authentication funtion is used. Here also Firebase jwt token is used for admin stat to secure 
 the confidential api.
+11.When a user register backend save his/her info.Treated as tousrist/user.When he/she applied join as tour guide by clicking
+join as tour guide ,status of the application will be pending.
+12.admin if accept the role of the user will be tourguide,idf reject then the user role will be unchnaged.
+13.The admin can access all the dashboard,the tourguide access the user and tour guide dash board .The user only access the 
+user dashboard.
