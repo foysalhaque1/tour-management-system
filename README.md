@@ -53,7 +53,7 @@ npm run dev
 
 
 
-### Other relavant info(Summarize info):
+## Other relavant info(Summarize info):
 Name of website: Explore Tours
 Admin:shahin@gmail.com
 username:shahin
