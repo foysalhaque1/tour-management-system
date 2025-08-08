@@ -1,5 +1,5 @@
 # React + Vite
-# 🏖️ Tourism Website
+# 🏖️  Explore Tours
 
 ## 🔍 Overview
 Project Overview 
@@ -52,6 +52,9 @@ npm run dev
 
 
 
+
+
+Other relavant info(Summarize info):
 Name of website: Explore Tours
 Admin:shahin@gmail.com
 username:shahin
@@ -59,7 +62,6 @@ password:123456*Fh
 
 live url:https://tourism-management-syste-465b0.web.app/
 
-Feature of our website:
 
 1.Here we use react framework,use express,node.js for backend.
 2.For database storing i use mongodb.
