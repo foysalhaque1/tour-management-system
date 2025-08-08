@@ -53,7 +53,7 @@ npm run dev
 
 
 
-## Other relavant info(Summarize info):
+## 🌐 Live Demo
 Name of website: Explore Tours
 Admin:shahin@gmail.com
 username:shahin
