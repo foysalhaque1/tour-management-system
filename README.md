@@ -12,8 +12,8 @@ https://tourism-management-syste-465b0.web.app/
 ## 🛠️ Technologies Used
 - React.js
 - Javascript
--DaisyUi
 - Tailwind CSS
+- DaisyUi
 - MongoDB
 - Express.js
 
