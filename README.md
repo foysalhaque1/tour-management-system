@@ -38,8 +38,7 @@ https://tourism-management-syste-465b0.web.app/
     "sweetalert2": "^11.22.0",
     "tailwindcss": "^4.1.8"
 
-## 🖥️ Screenshot
-![Homepage](./assets/homepage.png)
+
 
 ## 🧑‍💻 Run Locally
 
