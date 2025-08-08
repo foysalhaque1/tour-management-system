@@ -25,18 +25,29 @@ https://tourism-management-syste-465b0.web.app/
 - use firebase JWT
 
 ## 📦 Dependencies
-  "@tailwindcss/vite": "^4.1.8",
-    "axios": "^1.9.0",
-    "firebase": "^11.9.0",
-    "motion": "^12.16.0",
+   "@stripe/react-stripe-js": "^3.7.0",
+    "@stripe/stripe-js": "^7.5.0",
+    "@tailwindcss/cli": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.11",
+    "@tanstack/react-query": "^5.83.0",
+    "axios": "^1.10.0",
+    "firebase": "^12.0.0",
+    "framer-motion": "^12.23.9",
     "react": "^19.1.0",
+    "react-confetti": "^6.4.0",
     "react-datepicker": "^8.4.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.60.0",
     "react-icons": "^5.5.0",
-    "react-router": "^7.6.2",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router": "^7.7.0",
+    "react-select": "^5.10.2",
+    "react-share": "^5.2.2",
+    "react-tabs": "^6.1.0",
     "react-toastify": "^11.0.5",
-    "sweetalert2": "^11.22.0",
-    "tailwindcss": "^4.1.8"
+    "sweetalert2": "^11.6.13",
+    "tailwindcss": "^4.1.11",
+    "uuid": "^11.1.0"
 
 
 
