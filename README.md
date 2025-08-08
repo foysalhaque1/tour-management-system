@@ -43,7 +43,7 @@ https://tourism-management-syste-465b0.web.app/
 ## 🧑‍💻 Run Locally
 
 ```bash
-git clone https://github.com/yourusername/tourism-website.git
+git clone https://github.com/foysalhaque1/tour-management-system.git
 cd tourism-website
 npm install
 npm run dev
